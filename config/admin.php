@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Open Admin',
+    'name' => 'BlueDoorz Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Open</b> Admin',
+    'logo' => '<b>BlueDoorz</b> Admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>OA</b>',
+    'logo-mini' => '<img src="' . asset("storage/statics/bluedoorz.png") . '" width="30px"/>',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     | Html title for all pages.
     |
     */
-    'title' => 'Admin',
+    'title' => 'BlueDoorz Admin',
 
     /*
     |--------------------------------------------------------------------------
