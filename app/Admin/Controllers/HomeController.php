@@ -17,6 +17,7 @@ class HomeController extends Controller
             ->css_file(Admin::asset("open-admin/css/pages/dashboard.css"))
             ->title('Dashboard')
             ->row(Dashboard::title())
+//            ->view();
             ->row(function (Row $row) {
 
                 $row->column(4, function (Column $column) {

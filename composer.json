@@ -10,6 +10,12 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "open-admin-ext/config": "^1.0",
+        "open-admin-ext/grid-sortable": "^1.0",
+        "open-admin-ext/helpers": "^1.0",
+        "open-admin-ext/log-viewer": "^1.0",
+        "open-admin-ext/media-manager": "^1.0",
+        "open-admin-ext/scheduling": "^1.0",
         "open-admin-org/open-admin": "^1.0"
     },
     "require-dev": {

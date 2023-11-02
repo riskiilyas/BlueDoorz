@@ -23,3 +23,4 @@ OpenAdmin\Admin\Form::forget(['editor']);
 Use OpenAdmin\Admin\Admin;
 
 Admin::favicon(asset('storage/statics/favicon/favicon.ico'));
+Admin::js('/vendor/chartjs/dist/Chart.min.js');
