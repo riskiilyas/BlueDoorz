@@ -34,7 +34,9 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<img src="' . asset("storage/statics/bluedoorz.png") . '" width="30px"/>',
+    'logo-mini' => 'BD',
+
+//    'logo-mini' => '<img src="' . asset("storage/statics/bluedoorz.png") . '" width="30px"/>',
 
     /*
     |--------------------------------------------------------------------------

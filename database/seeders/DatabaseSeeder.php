@@ -16,15 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Creating User Role 'User' & 'Admin'
-        \App\Models\Role::factory()->create(['name' => 'User',]);
-        \App\Models\Role::factory()->create(['name' => 'Admin',]);
-
-        // Creating Users & Admin
+        // Creating Users
         \App\Models\User::factory(50)->create();
-        \App\Models\User::factory()->create([
-            'role_id' => 2
-        ]);
 
         // Creating Room Types
         \App\Models\RoomType::factory()->create([
