@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class BranchAddress extends Model
 {
     use HasFactory;
+
+    protected $table = 'branch_addresses';
+
+
 }

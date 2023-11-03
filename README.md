@@ -14,7 +14,7 @@
 - Inside the Project Directory, Copy these commands and accept all the instructions:
 ```
 composer migrate:fresh
-composer db:seed
+php artisan db:seed
 composer install
 php artisan vendor:publish --provider="OpenAdmin\Admin\AdminServiceProvider"
 php artisan admin:install

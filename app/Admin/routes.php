@@ -13,4 +13,6 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
 
+    $router->resource('/users', \App\Admin\Controllers\UserController::class);
+    $router->resource('/room-types', \App\Admin\Controllers\RoomTypeController::class);
 });
