@@ -8,6 +8,7 @@ use App\Models\BranchAddress;
 use App\Models\Role;
 use App\Models\Room;
 use Illuminate\Database\Seeder;
+use OpenAdmin\Admin\Auth\Database\Menu;
 
 class DatabaseSeeder extends Seeder
 {

@@ -13,11 +13,13 @@
 - Create file ```.env``` inside project directory and copy the content of file ```.env.example``` from project directory to ```.env```
 - Inside the Project Directory, Copy these commands and accept all the instructions:
 ```
-php artisan migrate:fresh
-php artisan db:seed
 composer install
 php artisan vendor:publish --provider="OpenAdmin\Admin\AdminServiceProvider"
+php artisan migrate:fresh
 php artisan admin:install
+php artisan db:seed
+
+
 php artisan admin:import helpers
 php artisan admin:import media-manager
 php artisan admin:import scheduling

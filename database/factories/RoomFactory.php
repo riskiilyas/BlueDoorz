@@ -24,7 +24,6 @@ class RoomFactory extends Factory
     {
         return [
             'number' => fake()->unique()->numerify('Room ###'),
-            'image_path' => fake()->imageUrl(),
             'type_id' => fake()->randomElement(RoomType::all())['id'],
             'branch_address_id' => $this->faker->randomElement(BranchAddress::all())['id']
         ];
