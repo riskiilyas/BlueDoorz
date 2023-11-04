@@ -19,7 +19,7 @@ php artisan migrate:fresh
 php artisan admin:install
 php artisan db:seed
 
-
+php artisan admin:import config
 php artisan admin:import helpers
 php artisan admin:import media-manager
 php artisan admin:import scheduling
