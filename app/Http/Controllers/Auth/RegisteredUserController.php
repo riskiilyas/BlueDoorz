@@ -53,12 +53,12 @@ class RegisteredUserController extends Controller
             'lastname' => $request->lastname,
             'phone_no' => $request->phone_no,
             'address' => $request->address,
-            'image_path' => 'public/profiles/sample.jpg',
+            'image_path' => 'statics/user.png',
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        
+
 
         event(new Registered($user));
 

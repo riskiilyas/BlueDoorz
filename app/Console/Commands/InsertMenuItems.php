@@ -18,14 +18,6 @@ class InsertMenuItems extends Command
 
     public function handle()
     {
-//        $connection = $this->option('connection');
-//
-//        // Use the specified database connection if provided, or fall back to the default connection.
-//        if ($connection) {
-//            config(['database.default' => $connection]);
-//        }
-
-        // Insert data into the admin_menu table without timestamps
         DB::statement("
             INSERT INTO admin_menu (parent_id, `order`, title, icon, uri, permission)
             VALUES (0, 2, 'Users', 'icon-users', '/users', null);
