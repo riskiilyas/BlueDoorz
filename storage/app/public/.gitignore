@@ -1,4 +1,5 @@
 *
 !statics
 !statics/*
+!statics/favicon/*
 !.gitignore
