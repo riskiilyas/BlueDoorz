@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Routing\Router;
+use OpenAdmin\Admin\Facades\Admin;
 
 Admin::routes();
 
