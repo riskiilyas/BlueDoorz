@@ -1,4 +1,4 @@
 *
 !statics
-!statics/
+!statics/*
 !.gitignore
