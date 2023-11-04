@@ -1,4 +1,7 @@
 *
+!tickets/
+!profiles/
+!rooms/
 !statics
 !statics/*
 !statics/favicon/*

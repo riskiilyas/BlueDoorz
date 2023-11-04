@@ -24,5 +24,7 @@ php artisan admin:import helpers
 php artisan admin:import media-manager
 php artisan admin:import scheduling
 php artisan admin:import log-viewer
+
+php artisan insert:menu-items
 ```
 - Use command ```php artisan serve``` to run the project
