@@ -27,10 +27,11 @@ class RoomImageController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new RoomImage());
+        $room = new RoomImage();
+        $grid = new Grid($room);
 
         $grid->column('id', __('Id'));
-        $grid->column('image_path', __('Image path'));
+        $grid->column('image_path', __('Image path'))->image(asset('storage/'.$room->image_path), 300, 300);
         $grid->column('room_id', __('Room id'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -67,7 +68,7 @@ class RoomImageController extends AdminController
         $form = new Form(new RoomImage());
 
 //        $form->text('image_path', __('Image path'));
-        $form->image('image_path', 'Room Image')->removable()->move('rooms');
+        $form->image('image_path', 'Room Image')->rules('mimes:jpg,png,jpeg')->uniqueName()->removable()->move('rooms');
 
 
         $roomsMap = [];

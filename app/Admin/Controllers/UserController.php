@@ -24,14 +24,15 @@ class UserController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new User());
+        $user = new User();
+        $grid = new Grid($user);
 
         $grid->column('id', __('Id'));
         $grid->column('firstname', __('Firstname'));
         $grid->column('lastname', __('Lastname'));
         $grid->column('phone_no', __('Phone no'));
         $grid->column('address', __('Address'));
-        $grid->column('image_path', __('Image path'));
+        $grid->column('image_path', __('Image path'))->image(asset('storage/'.$user->image_path), 80, 80);
         $grid->column('email', __('Email'));
         $grid->column('email_verified_at', __('Email verified at'));
         $grid->column('password', __('Password'));
