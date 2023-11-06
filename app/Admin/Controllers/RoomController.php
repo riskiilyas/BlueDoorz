@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\BranchAddress;
+use App\Models\RoomType;
 use OpenAdmin\Admin\Controllers\AdminController;
 use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
@@ -66,9 +68,11 @@ class RoomController extends AdminController
         $form = new Form(new Room());
 
         $form->text('number', __('Number'));
-        $form->number('type_id', __('Type id'));
-//        $form->belongsTo('type_id','room_types.id');
-        $form->number('branch_address_id', __('Branch address id'));
+        $form->select('type_id', __("Room Type"))->options(RoomType::all()->pluck('name', 'id'));
+
+        $addressesMap = [];
+        foreach (BranchAddress::all() as $record) $addressesMap[$record->id] = $record->street_address.', '.$record->city.', '.$record->state;
+        $form->select('branch_address_id', __("Branch Address"))->options($addressesMap);
 
         return $form;
     }
