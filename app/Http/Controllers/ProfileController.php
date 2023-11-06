@@ -52,7 +52,7 @@ class ProfileController extends Controller
 
         // Handle the uploaded image
         if ($request->hasFile('image_path')) {
-            if ($user->image_path) {
+            if ($user->image_path && !str_starts_with($user->image_path, 'statics/')) {
                 Storage::delete('public/' . $user->image_path);
             }
 
