@@ -17,4 +17,5 @@ Route::group([
     $router->resource('/room-types', \App\Admin\Controllers\RoomTypeController::class);
     $router->resource('/branch-address', \App\Admin\Controllers\BranchAddressController::class);
     $router->resource('/rooms', \App\Admin\Controllers\RoomController::class);
+    $router->resource('/room-images', \App\Admin\Controllers\RoomImageController::class);
 });
