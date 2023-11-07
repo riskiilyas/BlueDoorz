@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Config::load();  // Add this
+        try {
+            Config::load();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
