@@ -68,7 +68,7 @@
                                     <h2 class="text-xl font-semibold mb-2">{{ $room->type->name }}</h2>
                                     @foreach ($room->images as $image)
                                         @if ($loop->first && !empty($image->image_path))
-                                            <img src="{{ asset('storage/'.$image->image_path) }}" height="200px" width="100%" alt="Room Image">
+                                            <img src="{{ asset('storage/'.$image->image_path) }}" style="height: 200px; object-fit: cover;" alt="Room Image">
                                         @endif
                                     @endforeach
                                     <br>
