@@ -5,4 +5,5 @@
 !statics
 !statics/*
 !statics/favicon/*
+!statics/room_samples/*
 !.gitignore
