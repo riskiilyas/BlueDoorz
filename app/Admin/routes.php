@@ -18,4 +18,8 @@ Route::group([
     $router->resource('/branch-address', \App\Admin\Controllers\BranchAddressController::class);
     $router->resource('/rooms', \App\Admin\Controllers\RoomController::class);
     $router->resource('/room-images', \App\Admin\Controllers\RoomImageController::class);
+    $router->resource('/reservations', \App\Admin\Controllers\ReservationController::class);
+    $router->resource('/ratings', \App\Admin\Controllers\RatingController::class);
+    $router->resource('/cs', \App\Admin\Controllers\CustomerServiceController::class);
+
 });

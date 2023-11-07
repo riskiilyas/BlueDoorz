@@ -20,7 +20,7 @@ class InsertMenuItems extends Command
     {
         DB::statement("
             INSERT INTO admin_menu (parent_id, `order`, title, icon, uri, permission)
-            VALUES (0, 2, 'Users', 'icon-users', '/users', null);
+            VALUES (0, 9, 'Users', 'icon-users', '/users', null);
         ");
 
         DB::statement("
@@ -41,6 +41,21 @@ class InsertMenuItems extends Command
         DB::statement("
             INSERT INTO admin_menu (parent_id, `order`, title, icon, uri, permission)
             VALUES (0, 4, 'Room Images', 'icon-images', '/room-images', null);
+        ");
+
+        DB::statement("
+            INSERT INTO admin_menu (parent_id, `order`, title, icon, uri, permission)
+            VALUES (0, 2, 'Reservations', 'icon-book', '/reservations', null);
+        ");
+
+        DB::statement("
+            INSERT INTO admin_menu (parent_id, `order`, title, icon, uri, permission)
+            VALUES (0, 7, 'Ratings', 'icon-star', '/ratings', null);
+        ");
+
+        DB::statement("
+            INSERT INTO admin_menu (parent_id, `order`, title, icon, uri, permission)
+            VALUES (0, 8, 'Customer Service', 'icon-stethoscope', '/cs', null);
         ");
 
         $this->info('Menu items inserted successfully.');
