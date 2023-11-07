@@ -28,3 +28,14 @@ php artisan admin:import log-viewer
 php artisan insert:menu-items
 ```
 - Use command ```php artisan serve``` to run the project
+
+## Screenshots
+### Admin Dashboard
+<p align="center">
+  <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/2287470b-cdbc-446a-83b9-9aa16343cf1d" />
+</p>
+
+### User Dashboard
+<p align="center">
+  <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/74483ba4-e806-4044-a8a0-41ebab71acda" width="800" />
+</p>
