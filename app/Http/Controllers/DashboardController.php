@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class DashboardController extends Controller
 {
     public function index() {
-        return view('dashboard')->with('rooms', Room::all());;
+        return view('dashboard')->with('rooms', Room::paginate(12));;
     }
 
     public function search(Request $request) {
@@ -40,7 +40,7 @@ class DashboardController extends Controller
             $query->where('id', $type);
         })->whereHas('branchAddress', function ($query) use ($city) {
             $query->where('id', $city);
-        })->get();
+        })->paginate(12);
 
 //        $combinedRooms = $roomsByCity->get();
         return view('dashboard')->with('rooms', $filteredRooms);

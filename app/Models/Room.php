@@ -26,4 +26,9 @@ class Room extends Model
     {
         return $this->belongsTo(BranchAddress::class, 'branch_address_id');
     }
+
+    public function images()
+    {
+        return $this->hasMany(RoomImage::class);
+    }
 }

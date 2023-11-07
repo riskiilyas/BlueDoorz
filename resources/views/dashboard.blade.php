@@ -49,26 +49,42 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="flex justify-end items-end"> <!-- Use 'items-end' to align items to the bottom -->
+                            <div class="flex justify-end items-end">
+                                <!-- Use 'items-end' to align items to the bottom -->
                                 <x-primary-button>{{ __('Search') }}</x-primary-button>
+                            </div>
+                            <div class="flex justify-end items-end">
+                                <!-- Use 'items-end' to align items to the bottom -->
+                                <x-route-button-red
+                                    href="{{ route('dashboard') }}">{{ __('Clear Search') }}</x-route-button-red>
                             </div>
                         </div>
                     </form>
-{{--                    @foreach($rooms as $room)--}}
-{{--                        <div>--}}
-{{--                            <p>{{$room->number}}</p>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
+                    <br>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         @foreach ($rooms as $room)
-                            <div class="bg-white rounded-lg shadow p-4">
-                                <h2 class="text-xl font-semibold mb-2">{{ $room->type->name }}</h2>
-                                <p class="text-gray-600">{{ $room->number }}</p>
-                                <p class="text-gray-600">{{ $room->branchAddress->city }}, {{ $room->branchAddress->country }}</p>
+                            <div class="mb-4 md:mb-0">
+                                <div class="bg-white rounded-lg shadow p-4 h-full flex flex-col"> {{-- Set a fixed height with h-full and use flex for layout --}}
+                                    <h2 class="text-xl font-semibold mb-2">{{ $room->type->name }}</h2>
+                                    @foreach ($room->images as $image)
+                                        @if ($loop->first && !empty($image->image_path))
+                                            <img src="{{ asset('storage/'.$image->image_path) }}" height="200px" width="100%" alt="Room Image">
+                                        @endif
+                                    @endforeach
+                                    <br>
+                                    <h2>{{ $room->number }}</h2>
+                                    <p class="text-gray-600">{{ $room->branchAddress->city }}, {{ $room->branchAddress->street_address }}</p>
+                                    <p class="text-gray-600">Rp.{{ number_format($room->type->price) }}/Night</p>
+                                    <br>
+                                    <div class="mt-auto"> {{-- Use mt-auto to push the button to the bottom-left corner --}}
+                                        <x-route-button href="{{ route('dashboard') }}">{{ __('Get Detail') }}</x-route-button>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
-{{--                    {{ $rooms->links() }} --}}{{-- Display pagination links --}}
+                    <br>
+                    {{ $rooms->links() }}
                 </div>
             </div>
         </div>
