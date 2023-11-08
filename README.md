@@ -12,12 +12,13 @@
 - Clone or Download the Source Code
 - Create file ```.env``` inside project directory and copy the content of file ```.env.example``` from project directory to ```.env```
 - Setup the database used for the application
+- Make sure npm is installed
 - Inside the Project Directory, Copy these commands and accept all the instructions:
 ```
 composer install
 php artisan app:init-app
 ```
-- Use command ```php artisan serve``` to run the project
+- Use command ```php artisan serve``` and ```npm run dev``` to run the project
 
 ## Screenshots
 ### Admin Dashboard
