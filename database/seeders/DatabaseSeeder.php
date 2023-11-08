@@ -47,6 +47,12 @@ class DatabaseSeeder extends Seeder
         // Creating the Rooms
         Room::factory(250)->create();
 
+        $imageEachRoom = 3;
+        for ($i=0; $i < $imageEachRoom; $i++) $this->createRoomImageEachRooms();
+    }
+
+    public function createRoomImageEachRooms() {
+
         $rooms = Room::all();
 
         $imagePaths = [];

@@ -43,23 +43,23 @@
                             <p class="text-gray-500">{{ $room->description }}</p>
                             <div class="mt-4">
                                 <p class="text-sm text-gray-700 font-semibold">
-                                    <i class="fas fa-bed text-blue-500"></i> Room Number: {{ $room->number }}
+                                    <i class="fa fa-key text-blue-500"></i> Room Number: {{ $room->number }}
                                 </p>
                                 <p class="text-sm text-gray-700 font-semibold">
-                                    <i class="fas fa-map-marker-alt text-green-500"></i> Branch
+                                    <i class="fa fa-map-marker text-green-500"></i> Branch
                                     Address: {{ $room->branchAddress->street_address}}, {{$room->branchAddress->city}}
                                     , {{$room->branchAddress->state}}
-                                </p>
-                                <p class="text-sm text-gray-700 font-semibold">
-                                    <i class="fas fa-users text-red-500"></i> Capacity: {{ $room->capacity }} people
                                 </p>
                             </div>
                             <div class="mt-4">
                                 <div class="text-sm text-gray-700 flex justify-between">
                                     <p>
-                                        <i class="fas fa-bed text-blue-500"></i> Room Type: {{ $room->type->name }}
+                                        <i class="fa fa-bed text-blue-500"></i> Room Type: {{ $room->type->name }}
                                     </p>
-                                    <p class="font-semibold">Price: ${{ $room->type->price }}</p>
+                                    <span>
+                                             <p class="font-semibold">Price: Rp.{{ number_format($room->type->price) }} / Night
+                                                 <i class="fa fa-tag"></i></p>
+                                    </span>
                                 </div>
                                 <br>
                                 <form action="/" method="get" style="direction: rtl">
@@ -93,7 +93,8 @@
                                 <div class="bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
                                     <div class="flex justify-between">
                                         <div class="w-12 h-12 rounded-full overflow-hidden">
-                                            <img src="{{ asset('storage/statics/user.png') }}" alt="User 2" class="w-full h-full object-cover">
+                                            <img src="{{ asset('storage/statics/user.png') }}" alt="User 2"
+                                                 class="w-full h-full object-cover">
                                         </div>
                                         <div class="flex-fill">
                                             <div class="text-right">
@@ -117,7 +118,8 @@
                                 <div class="bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
                                     <div class="flex justify-between">
                                         <div class="w-12 h-12 rounded-full overflow-hidden">
-                                            <img src="{{ asset('storage/statics/user.png') }}" alt="User 2" class="w-full h-full object-cover">
+                                            <img src="{{ asset('storage/statics/user.png') }}" alt="User 2"
+                                                 class="w-full h-full object-cover">
                                         </div>
                                         <div class="flex-fill">
                                             <div class="text-right">
