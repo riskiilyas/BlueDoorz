@@ -47,6 +47,7 @@ class InitApp extends Command
             new Process(['php','artisan','admin:import', 'log-viewer']),
             new Process(['php','artisan','insert:menu-items']),
             new Process(['npm', 'install']),
+            new Process(['php','artisan', 'storage:link']),
         ];
 
         foreach ($processes as $process) {
