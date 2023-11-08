@@ -42,48 +42,62 @@
                             <h2 class="text-xl font-semibold">{{ $room->name }}</h2>
                             <p class="text-gray-500">{{ $room->description }}</p>
                             <div class="mt-4">
-                                <p class="text-sm text-gray-700 font-semibold">
-                                    <i class="fa fa-key text-blue-500"></i> Room Number: {{ $room->number }}
-                                </p>
-                                <p class="text-sm text-gray-700 font-semibold">
-                                    <i class="fa fa-map-marker text-green-500"></i> Branch
-                                    Address: {{ $room->branchAddress->street_address}}, {{$room->branchAddress->city}}
-                                    , {{$room->branchAddress->state}}
-                                </p>
                             </div>
                             <div class="mt-4">
-                                <div class="text-sm text-gray-700 flex justify-between">
-                                    <p>
-                                        <i class="fa fa-bed text-blue-500"></i> Room Type: {{ $room->type->name }}
-                                    </p>
-                                    <span>
+                                <div class="text-md text-gray-700 flex justify-between">
+                                    <div>
+                                        <h2 class="text-md text-gray-700 font-semibold">
+                                            <i class="fa fa-key text-blue-500"></i> Room Number: {{ $room->number }}
+                                        </h2>
+                                        <br>
+                                        <h2 class="text-sm text-gray-700 font-semibold">
+                                            <i class="fa fa-map-marker text-green-500"></i> Branch
+                                            Address: {{ $room->branchAddress->street_address}}
+                                            , {{$room->branchAddress->city}}
+                                            , {{$room->branchAddress->state}}
+                                        </h2>
+                                        <br>
+                                        <h2>
+                                            <i class="fa fa-bed text-blue-500"></i> Room Type: {{ $room->type->name }}
+                                        </h2>
+                                    </div>
+                                    <div>
+                                           <span>
                                              <p class="font-semibold">Price: Rp.{{ number_format($room->type->price) }} / Night
                                                  <i class="fa fa-tag"></i></p>
+                                               <br>
                                     </span>
+                                            <div class="flex-fill">
+                                                <h2 class="text-md text-right text-gray-700 font-semibold">
+                                                    <i class="fa fa-calendar text-blue-500"></i> Date:  @if(isset($parameters['daterange']))
+                                                        {{ $parameters['daterange']}} @else Today  @endif
+                                                </h2>
+
+                                                <script>
+                                                    $(function () {
+                                                        $('input.datepicker-input').daterangepicker({
+                                                            opens: 'left'
+                                                        }, function (start, end, label) {
+                                                            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                                                        });
+                                                    });
+                                                </script>
+                                            </div>
+                                            <br>
+                                            <div class="text-right">
+                                                @if(isset($parameters['daterange']))
+                                                    <x-route-button
+                                                        href="/book/{{$room->id}}?daterange={{$parameters['daterange']}}"   >{{ __('Book Now') }}
+                                                    </x-route-button>
+                                                @else
+                                                    <x-route-button
+                                                        href="{{ route('book', ['id' => $room->id]) }}">{{ __('Book Now') }}
+                                                    </x-route-button>
+                                                @endif
+                                            </div>
+                                    </div>
                                 </div>
                                 <br>
-                                <form action="/" method="get" style="direction: rtl">
-                                    <div class="w-1/4 flex-fill">
-                                        <x-input-label for="daterange" :value="__('Date')"/>
-                                        <input type="text" name="daterange" class="text-center datepicker-input"
-                                               style="width: 100%;" @if(isset($parameters['daterange']))
-                                                   value="{{ $parameters['daterange']}}" @endif
-                                        />
-
-                                        <script>
-                                            $(function () {
-                                                $('input.datepicker-input').daterangepicker({
-                                                    opens: 'left'
-                                                }, function (start, end, label) {
-                                                    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-                                                });
-                                            });
-                                        </script>
-                                    </div>
-                                    <div class="text-right mt-4 flex">
-                                        <x-primary-button>{{ __('Book Now') }}</x-primary-button>
-                                    </div>
-                                </form>
                             </div>
                         </div>
                         <div class="w-full mt-8">

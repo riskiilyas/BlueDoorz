@@ -113,18 +113,16 @@
                                     <br>
                                     <div
                                         class="mt-auto"> {{-- Use mt-auto to push the button to the bottom-left corner --}}
-                                        <x-route-button
+                                        @if(isset($parameters['daterange']))
+                                            <x-route-button
+                                                href="/room/{{$room->id}}?daterange={{$parameters['daterange']}}"   >{{ __('Get Detail') }}
+                                            </x-route-button>
+                                        @else
+                                            <x-route-button
+                                                href="{{ route('room', ['id' => $room->id]) }}">{{ __('Get Detail') }}
+                                            </x-route-button>
+                                        @endif
 
-                                            href="
-                                             {{ route('room', ['id' => $room->id]) }}
-
-                                            ">{{ __('Get Detail') }}
-                                        </x-route-button>
-{{--                                        @if(isset($parameters['daterange']))--}}
-{{--                                            {{ route('room', ['id' => $room->id, 'daterange' => $parameters['daterange']]) }}--}}
-{{--                                        @else--}}
-{{--                                            {{ route('room', ['id' => $room->id]) }}--}}
-{{--                                        @endif--}}
                                     </div>
                                 </div>
                             </div>
