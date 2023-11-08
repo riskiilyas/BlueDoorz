@@ -57,7 +57,10 @@ class InitApp extends Command
                 $output = $process->getOutput();
                 echo $output;
             } else {
-                echo 'An error occurred: ' . $process->getOutput();
+                echo "\n";
+                $this->error("An error occurred");
+                echo "\n" . $process->getOutput();
+                return;
             }
         }
         
