@@ -3,6 +3,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-Vf538c87W63D6F5szc/0lRtPpz2tnw0tm41LrB/Hdi5r5X2b6Nc8J6mKSp3F7If6" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
 <x-app-layout>
     <x-slot name="header">
@@ -20,11 +22,11 @@
                             <div class="owl-carousel owl-theme">
                                 @foreach($room->images as $image)
                                     <div class="item">
-                                        <div class="h-200 w-full flex items-center justify-center">
+                                        <a href="{{ asset('storage/' . $image->image_path) }}" data-lightbox="room-images">
                                             <img src="{{ asset('storage/' . $image->image_path) }}"
                                                  alt="{{ $room->name }}"
-                                                 class="object-cover rounded-lg shadow-lg h-200">
-                                        </div>
+                                                 class="w-full object-cover rounded-lg shadow-lg h-400">
+                                        </a>
                                     </div>
                                 @endforeach
                             </div>
