@@ -97,8 +97,7 @@
                                     <br>
                                     <div
                                         class="mt-auto"> {{-- Use mt-auto to push the button to the bottom-left corner --}}
-                                        <x-route-button
-                                            href="{{ route('dashboard') }}">{{ __('Get Detail') }}</x-route-button>
+                                        <x-route-button href="{{ route('room', ['id' => $room->id]) }}">{{ __('Get Detail') }}</x-route-button>
                                     </div>
                                 </div>
                             </div>

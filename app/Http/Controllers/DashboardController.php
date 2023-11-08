@@ -46,4 +46,14 @@ class DashboardController extends Controller
         $parameters = $request->all();
         return view('dashboard')->with(['rooms' => $availableRooms, 'parameters' => $parameters]);
     }
+
+    public function room($id)
+    {
+        // Retrieve the room based on the provided ID (assuming you have a Room model)
+        $room = Room::find($id);
+
+        // Return the "room" view and pass the room data to the view
+        return view('room', compact('room'));
+    }
+
 }
