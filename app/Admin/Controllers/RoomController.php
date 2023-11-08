@@ -27,10 +27,9 @@ class RoomController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Room());
-
         $grid->column('id', __('Id'));
         $grid->column('number', __('Number'));
-        $grid->column('type_id', __('Type id'));
+        $grid->column('type_id', __('Type id'))->filter('like');
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
         $grid->column('branch_address_id', __('Branch address id'));

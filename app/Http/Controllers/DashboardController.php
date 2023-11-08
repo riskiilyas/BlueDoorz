@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,26 +24,26 @@ class DashboardController extends Controller
 
         $type = intval($request->type);
         $city = intval($request->city);
-        $parts = explode(' - ', $request->daterange);
-        $checkIn = $parts[0];
-        $checkOut = $parts[1];
 
-//        $roomsByType = Room::whereHas('type', function ($query) use ($type) {
-//            $query->where('id', $type);
-//        })->get();
-//
-//        $roomsByCity = $roomsByType::whereHas('branchAddress', function ($query) use ($city) {
-//            $query->where('city', $city);
-//        });
+        $dateRange = explode(' - ', $request->daterange);
+        $startDate = Carbon::createFromFormat('d/m/Y', $dateRange[0]);
+        $endDate = Carbon::createFromFormat('d/m/Y', $dateRange[1]);
 
-        // Filter rooms based on 'type' and 'city'
-        $filteredRooms = Room::whereHas('type', function ($query) use ($type) {
+        $availableRooms = Room::whereDoesntHave('reservations', function ($query) use ($startDate, $endDate) {
+            $query->where(function ($subquery) use ($startDate, $endDate) {
+                // Check for reservations that intersect with the requested date range
+                $subquery->where(function ($intersectQuery) use ($startDate, $endDate) {
+                    $intersectQuery->where('checkin', '<', $endDate)
+                        ->where('checkout', '>', $startDate);
+                });
+            });
+        })->whereHas('type', function ($query) use ($type) {
             $query->where('id', $type);
         })->whereHas('branchAddress', function ($query) use ($city) {
             $query->where('id', $city);
         })->paginate(12);
 
-//        $combinedRooms = $roomsByCity->get();
-        return view('dashboard')->with('rooms', $filteredRooms);
+        $parameters = $request->all();
+        return view('dashboard')->with(['rooms' => $availableRooms, 'parameters' => $parameters]);
     }
 }
