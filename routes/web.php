@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/{user}', [ProfileController::class, 'updateImage'])->name('profile.update.image');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/tickets', [TicketController::class, 'index'])->name('tickets');
+    Route::post('/tickets', [TicketController::class,'submit'])->name('tickets.submit');
     Route::get('/history', [HistoryController::class, 'index'])->name('history');
 });
 

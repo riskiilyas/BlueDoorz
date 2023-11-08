@@ -9,4 +9,8 @@ class TicketController extends Controller
     public function index() {
         return view('ticket');
     }
+
+    public function submit(Request $request) {
+        
+    }
 }
