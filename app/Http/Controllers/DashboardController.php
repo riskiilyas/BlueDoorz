@@ -37,14 +37,23 @@ class DashboardController extends Controller
                         ->where('checkout', '>', $startDate);
                 });
             });
-        })->whereHas('type', function ($query) use ($type) {
-            $query->where('id', $type);
-        })->whereHas('branchAddress', function ($query) use ($city) {
-            $query->where('id', $city);
-        })->paginate(12);
+        });
+
+        if($type!=0) {
+            $availableRooms = $availableRooms->whereHas('type', function ($query) use ($type) {
+                $query->where('id', $type);
+            });
+        }
+
+        if($city!=0) {
+            $availableRooms = $availableRooms->whereHas('branchAddress', function ($query) use ($city) {
+                $query->where('id', $city);
+            });
+        }
+
 
         $parameters = $request->all();
-        return view('dashboard')->with(['rooms' => $availableRooms, 'parameters' => $parameters]);
+        return view('dashboard')->with(['rooms' => $availableRooms->paginate(12), 'parameters' => $parameters]);
     }
 
     public function room($id)
