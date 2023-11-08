@@ -33,7 +33,7 @@ class InitApp extends Command
             $this->info(".env file doesn't exist. Add .env file");
             return;
         }
-    
+
         $processes = [
             new Process(['php','artisan','vendor:publish','--provider="OpenAdmin\Admin\AdminServiceProvider"']),
             new Process(['php','artisan','key:generate']),
@@ -47,7 +47,6 @@ class InitApp extends Command
             new Process(['php','artisan','admin:import', 'log-viewer']),
             new Process(['php','artisan','insert:menu-items']),
             new Process(['npm', 'install']),
-
         ];
 
         foreach ($processes as $process) {
@@ -63,7 +62,7 @@ class InitApp extends Command
                 return;
             }
         }
-        
+
     }
 
 }

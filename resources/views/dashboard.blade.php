@@ -6,14 +6,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+{{--            {{ __('Dashboard') }}--}}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("Booking") }}
+{{--                    {{ __("Booking") }}--}}
                     <br><br>
                     <form action="{{ route('dashboard.search') }}" method="get">
                         <div class="flex space-x-1"> <!-- Use the 'flex' and 'space-x-4' classes -->
@@ -22,7 +22,7 @@
                                 <input type="text" name="daterange" class="form-input" style="width: 100%"
                                        @if(isset($parameters['daterange']))
                                            value="{{ $parameters['daterange']}}"
-                                    @endif
+                                       @endif
                                 />
 
                                 <script>
@@ -45,7 +45,8 @@
                                                     selected
                                         @endif
                                         @endif
-                                    >All Type</option>
+                                    >All Type
+                                    </option>
                                     @foreach (\App\Models\RoomType::all() as $item)
                                         <option value="{{ $item->id }}"
                                                 @if(isset($parameters['type']))
@@ -67,7 +68,8 @@
                                                     selected
                                         @endif
                                         @endif
-                                    >All City</option>
+                                    >All City
+                                    </option>
                                     @foreach (\App\Models\BranchAddress::all() as $item)
                                         <option value="{{ $item->id }}"
                                                 @if(isset($parameters['city']))
@@ -112,7 +114,17 @@
                                     <div
                                         class="mt-auto"> {{-- Use mt-auto to push the button to the bottom-left corner --}}
                                         <x-route-button
-                                            href="{{ route('room', ['id' => $room->id]) }}">{{ __('Get Detail') }}</x-route-button>
+
+                                            href="
+                                             {{ route('room', ['id' => $room->id]) }}
+
+                                            ">{{ __('Get Detail') }}
+                                        </x-route-button>
+{{--                                        @if(isset($parameters['daterange']))--}}
+{{--                                            {{ route('room', ['id' => $room->id, 'daterange' => $parameters['daterange']]) }}--}}
+{{--                                        @else--}}
+{{--                                            {{ route('room', ['id' => $room->id]) }}--}}
+{{--                                        @endif--}}
                                     </div>
                                 </div>
                             </div>
