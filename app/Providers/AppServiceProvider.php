@@ -23,7 +23,6 @@ class AppServiceProvider extends ServiceProvider
         try {
             Config::load();
         } catch (\Throwable $th) {
-            throw $th;
         }
     }
 }

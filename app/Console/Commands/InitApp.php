@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
 
 class InitApp extends Command
@@ -27,11 +29,13 @@ class InitApp extends Command
      */
     public function handle()
     {
-
+        if(!File::exists(base_path() . '/.env')) {
+            $this->info(".env file doesn't exist. Add .env file");
+            return;
+        }
+    
         $processes = [
-            new Process(['composer', 'install']),
             new Process(['php','artisan','vendor:publish','--provider="OpenAdmin\Admin\AdminServiceProvider"']),
-            new Process(['cp','.env.example','.env']),
             new Process(['php','artisan','key:generate']),
             new Process(['php','artisan','migrate:fresh']),
             new Process(['php','artisan','admin:install']),
