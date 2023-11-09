@@ -16,6 +16,11 @@ class Reservation extends Model
         return $this->belongsTo(Room::class, 'room_id');
     }
 
+    public function payment()
+    {
+        return $this->belongsTo(PaymentBank::class, 'payment_bank_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
