@@ -26,11 +26,18 @@ php artisan app:init-app
   <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/2287470b-cdbc-446a-83b9-9aa16343cf1d" />
 </p>
 
-### User Website
+<h2>User Website</h2>
 <p align="center">
+  <h4>1. Dashboard Page</h4>
   <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/74483ba4-e806-4044-a8a0-41ebab71acda" width="800" />
+  <h4>2. Room Page</h4>
   <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/c6325c20-ed74-4692-96ea-85a9cc316b0d" width="800" />
+  <h4>3. Booking Page</h4>
   <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/01b765ed-74d1-47b1-8719-2cc07afdb3fd" width="800" />
+  <h4>4. History Page</h4>
   <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/62338c8d-3357-482d-93c4-a103faf3b6d0" width="800" />
+  <h4>5. Add Review Page</h4>
   <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/c200f61d-6cfe-4c0e-8f98-34cc5b69dec8" width="800" />
+  <h4>6. Profile Page</h4>
+  <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/7d2028e7-d79b-4543-8ec2-a354f84d918e" width="800" />
 </p>
