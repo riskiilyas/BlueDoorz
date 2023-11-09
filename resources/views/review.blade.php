@@ -54,14 +54,14 @@
                     </div>
 
                     <!-- Review Form -->
-                    <form action="/" method="post">
+                    <form action="/review/{{$reservation->id}}" method="post">
                         @csrf
                         <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
 
                         <div class="mb-4">
                             <label for="rating" class="block text-gray-700 text-sm font-bold mb-2">Rating</label>
                             <div id="rating" style="width: 200px;"></div>
-                            <input type="hidden" name="rating" id="rating_input" value="" />
+                            <input type="hidden" name="rating" id="rating_input" value="4" />
                         </div>
 
 
