@@ -64,7 +64,13 @@
             <br>
 
             <!-- Form section -->
-            <form action="/" method="post" enctype="multipart/form-data" class="container mx-auto p-4 w-1/2">
+            <form
+                @if(isset($parameters['daterange']))
+                    action="/pay/{{$room->id}}?daterange={{$parameters['daterange']}}"
+                @else
+                    action="{{ route('pay', ['id' => $room->id]) }}"
+                @endif
+                method="post" enctype="multipart/form-data" class="container mx-auto p-4 w-1/2" id="paymentForm">
                 @csrf
                 <div class="mb-4 overflow-hidden items-center flex flex-col"> <!-- Center the label and input vertically -->
                     <label for="payment_proof" class="block font-medium text-gray-700 text-center mb-2">Payment Proof</label>

@@ -19,9 +19,11 @@ return new class extends Migration
             $table->unsignedBigInteger('total_price');
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('payment_bank_id');
 
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('payment_bank_id')->references('id')->on('payment_banks')->onDelete('cascade');
 
             $table->timestamps();
         });

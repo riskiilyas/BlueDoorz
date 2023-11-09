@@ -87,4 +87,25 @@ class DashboardController extends Controller
         return view('booking')->with(['room' => $room, 'parameters' => $parameters, 'totalPrice' => $totalPrice]);
     }
 
+    public function pay(Request $request, $id)
+    {
+        dd($request);
+        $room = Room::find($id);
+
+        $daterange = $request->input('daterange');
+
+        if ($daterange) {
+            list($start, $end) = explode(' - ', $daterange);
+            $startDate = Carbon::createFromFormat('m/d/Y', trim($start));
+            $endDate = Carbon::createFromFormat('m/d/Y', trim($end));
+            $numberOfDays = $endDate->diffInDays($startDate)+1;
+        } else {
+            $numberOfDays = 1;
+        }
+
+        $totalPrice = $room->type->price * $numberOfDays;
+
+        $parameters = $request->all();
+        return view('booking')->with(['room' => $room, 'parameters' => $parameters, 'totalPrice' => $totalPrice]);
+    }
 }
