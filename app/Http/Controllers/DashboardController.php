@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\RoomType;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -67,11 +68,23 @@ class DashboardController extends Controller
 
     public function book(Request $request, $id)
     {
-        // Retrieve the room based on the provided ID (assuming you have a Room model)
         $room = Room::find($id);
 
+        $daterange = $request->input('daterange');
+
+        if ($daterange) {
+            list($start, $end) = explode(' - ', $daterange);
+            $startDate = Carbon::createFromFormat('m/d/Y', trim($start));
+            $endDate = Carbon::createFromFormat('m/d/Y', trim($end));
+            $numberOfDays = $endDate->diffInDays($startDate)+1;
+        } else {
+            $numberOfDays = 1;
+        }
+
+        $totalPrice = $room->type->price * $numberOfDays;
+
         $parameters = $request->all();
-        return view('room')->with(['room' => $room, 'parameters' => $parameters]);
+        return view('booking')->with(['room' => $room, 'parameters' => $parameters, 'totalPrice' => $totalPrice]);
     }
 
 }
