@@ -32,6 +32,17 @@ class Room extends Model
         return $this->hasMany(RoomImage::class);
     }
 
+
+    public function averageRating()
+    {
+        $averageRating = $this->reservations()
+            ->join('ratings', 'reservations.id', '=', 'ratings.reservation_id')
+            ->avg('ratings.rating');
+
+        return $averageRating ?: 0; // Return 0 if no ratings are available
+    }
+
+
     public function reservations()
     {
         return $this->hasMany(Reservation::class);

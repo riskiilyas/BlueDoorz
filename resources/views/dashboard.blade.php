@@ -2,6 +2,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <x-app-layout>
     <x-slot name="header">
@@ -118,7 +119,7 @@
                                     <p class="text-gray-600">Rp.{{ number_format($room->type->price) }}/Night</p>
                                     <br>
                                     <div
-                                        class="mt-auto"> {{-- Use mt-auto to push the button to the bottom-left corner --}}
+                                        class="mt-auto flex justify-between"> {{-- Use mt-auto to push the button to the bottom-left corner --}}
                                         @if(isset($parameters['daterange']))
                                             <x-route-button
                                                 href="/room/{{$room->id}}?daterange={{$parameters['daterange']}}"   >{{ __('Get Detail') }}
@@ -128,7 +129,16 @@
                                                 href="{{ route('room', ['id' => $room->id]) }}">{{ __('Get Detail') }}
                                             </x-route-button>
                                         @endif
-
+                                        @if($room->averageRating()!=0)
+                                            <div class="flex items-center space-x-2"> {{-- Added flex and items-center --}}
+                                                <i class="fa fa-star text-yellow-500" style="margin-right: 0.3rem;"></i>
+                                                {{ number_format($room->averageRating(), 2) }}
+                                            </div>
+                                        @else
+                                            <div class="flex items-center space-x-2"> {{-- Added flex and items-center --}}
+                                                No Reviews
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
