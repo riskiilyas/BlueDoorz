@@ -23,13 +23,13 @@ php artisan app:init-app
 ## Screenshots
 ### Admin Dashboard
 <p align="center">
-  <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/2287470b-cdbc-446a-83b9-9aa16343cf1d" />
+  <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/353f9015-7cae-431b-80de-1942e7eaddbf" />
 </p>
 
 <h2>User Website</h2>
 <p align="center">
   <h4>1. Dashboard Page</h4>
-  <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/74483ba4-e806-4044-a8a0-41ebab71acda" width="800" />
+  <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/0636e591-a175-4bb2-ba35-2b206791c8c1" width="800" />
   <h4>2. Room Page</h4>
   <img src="https://github.com/riskiilyas/BlueDoorz/assets/71499142/c6325c20-ed74-4692-96ea-85a9cc316b0d" width="800" />
   <h4>3. Booking Page</h4>
