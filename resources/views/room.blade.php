@@ -94,59 +94,34 @@
                         <div class="w-full mt-8">
                             <h2 class="text-2xl font-semibold mb-4">User Reviews</h2>
                             <div class="grid grid-cols-1">
-                                <!-- Dummy Review 1 -->
-                                <div class="bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
-                                    <div class="flex justify-between">
-                                        <div class="w-12 h-12 rounded-full overflow-hidden">
-                                            <img src="{{ asset('storage/statics/user.png') }}" alt="User 2"
-                                                 class="w-full h-full object-cover">
-                                        </div>
-                                        <div class="flex-fill">
-                                            <div class="text-right">
-                                                <i class="fa fa-star text-yellow-500"></i>
-                                                <i class="fa fa-star text-yellow-500"></i>
-                                                <i class="fa fa-star text-yellow-500"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                @forelse ($room->reservations as $reservation)
+                                    @if($reservation->rating)
+                                        <div class="bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
+                                            <div class="flex justify-between">
+                                                <div class="w-12 h-12 rounded-full overflow-hidden">
+                                                    <img src="{{ asset('storage/'.$reservation->user->image_path) }}" alt="{{ $reservation->user->firstname }}"
+                                                         class="w-full h-full object-cover">
+                                                </div>
+                                                <div class="flex-fill">
+                                                    <div class="text-right">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            <i class="fa fa-star {{ $i <= $reservation->rating->rating ? 'text-yellow-500' : '' }}"></i>
+                                                        @endfor
+                                                    </div>
+                                                    <div class="text-right mt-4">
+                                                        <p class="ml-2">{{ $reservation->rating->created_at->format('Y-m-d') }}</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="text-right mt-4">
-                                                <p class="ml-2">2023-11-08</p>
-
-                                            </div>
+                                            <h3 class="text-xl font-semibold mt-2">{{ $reservation->user->firstname.' '.$reservation->user->lastname }}</h3>
+                                            <p class="text-gray-600">{{ $reservation->rating->comment }}</p>
                                         </div>
-                                    </div>
-                                    <h3 class="text-xl font-semibold mt-2">User 2</h3>
-                                    <p class="text-gray-600">Enjoyed my stay. Highly recommended!</p>
-                                </div>
-
-                                <!-- Dummy Review 2 -->
-                                <div class="bg-white rounded-lg overflow-hidden shadow-md p-4 mb-4">
-                                    <div class="flex justify-between">
-                                        <div class="w-12 h-12 rounded-full overflow-hidden">
-                                            <img src="{{ asset('storage/statics/user.png') }}" alt="User 2"
-                                                 class="w-full h-full object-cover">
-                                        </div>
-                                        <div class="flex-fill">
-                                            <div class="text-right">
-                                                <i class="fa fa-star text-yellow-500"></i>
-                                                <i class="fa fa-star text-yellow-500"></i>
-                                                <i class="fa fa-star text-yellow-500"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="text-right mt-4">
-                                                <p class="ml-2">2023-11-08</p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h3 class="text-xl font-semibold mt-2">User 2</h3>
-                                    <p class="text-gray-600">Enjoyed my stay. Highly recommended!</p>
-                                </div>
-
-
-                                <!-- Add more dummy reviews here -->
+                                    @endif
+                                @empty
+                                    <p>No reviews yet.</p>
+                                @endforelse
                             </div>
+
                         </div>
                     </div>
                 </div>

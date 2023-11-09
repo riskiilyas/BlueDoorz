@@ -24,6 +24,7 @@
                                 <th class="py-2 px-4 border-b">Check-out Date</th>
                                 <th class="py-2 px-4 border-b">Total Price</th>
                                 <th class="py-2 px-4 border-b">Room</th>
+                                <th class="py-2 px-4 border-b">Type</th>
                                 <th class="py-2 px-4 border-b">Hotel Location</th>
                                 <th class="py-2 px-4 border-b">Payment Method</th>
                                 <th class="py-2 px-4 border-b">Review</th>
@@ -36,6 +37,7 @@
                                     <td class="py-2 px-4">{{ $reservation->checkin }}</td>
                                     <td class="py-2 px-4">{{ $reservation->checkout }}</td>
                                     <td class="py-2 px-4">Rp.{{ number_format($reservation->total_price) }}</td>
+                                    <td class="py-2 px-4">{{ $reservation->room->number }}</td>
                                     <td class="py-2 px-4">{{ $reservation->room->type->name }}</td>
                                     <td class="py-2 px-4">{{ $reservation->room->branchAddress->city }}</td>
                                     <td class="py-2 px-4">{{ $reservation->payment->bank_name }}</td>
