@@ -9,7 +9,9 @@ use App\Models\PaymentBank;
 use App\Models\Role;
 use App\Models\Room;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use OpenAdmin\Admin\Auth\Database\Menu;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -64,6 +66,49 @@ class DatabaseSeeder extends Seeder
                 'bank_name' => $bankName,
                 'bank_image_path' => 'statics/bank/'.$bankName.'.png'
                 ]);
+        }
+
+        $faker = \Faker\Factory::create();
+
+        for ($i = 0; $i < 500; $i++) {
+            $checkin = $faker->dateTimeBetween('-1 year', 'now');
+            $checkout = $faker->dateTimeBetween($checkin, '+1 month');
+
+            $roomTypeId = $faker->randomElement(\App\Models\RoomType::pluck('id'));
+            $roomTypePrice = \App\Models\RoomType::where('id', $roomTypeId)->value('price');
+
+            // Calculate the total price based on the number of days and room type's price
+            $daysDifference = $checkin->diff($checkout)->days;
+            $totalPrice = $roomTypePrice * $daysDifference;
+
+            DB::table('reservations')->insert([
+                'checkin' => $checkin,
+                'checkout' => $checkout,
+                'payment_proof' => 'statics/sample_receipt.png',
+                'total_price' => $totalPrice,
+                'room_id' => $faker->randomElement(\App\Models\Room::pluck('id')),
+                'user_id' => $faker->randomElement(\App\Models\User::pluck('id')),
+                'payment_bank_id' => $faker->randomElement(\App\Models\PaymentBank::pluck('id')),
+                'created_at' => $checkin, // Set created_at to checkin date
+                'updated_at' => now(),
+            ]);
+        }
+
+        // Retrieve all reservations
+        $reservations = \App\Models\Reservation::all();
+
+        foreach ($reservations as $reservation) {
+            $user_id = $reservation->user_id;
+
+            // Seed a rating for each reservation with user_id from reservation
+            DB::table('ratings')->insert([
+                'rating' => $faker->numberBetween(1, 5), // Customize the rating value
+                'comment' => $faker->sentence(),
+                'reservation_id' => $reservation->id,
+                'user_id' => $user_id,
+                'created_at' => $reservation->checkin, // Set created_at to reservation checkin date
+                'updated_at' => now(),
+            ]);
         }
     }
 

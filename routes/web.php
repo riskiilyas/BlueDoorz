@@ -28,6 +28,10 @@ Route::get('/book/{id}', [DashboardController::class, 'book'])->middleware(['aut
 Route::post('/book/{id}', [DashboardController::class, 'pay'])->middleware(['auth', 'verified'])->name('pay');
 Route::get('/review/{id}', [HistoryController::class, 'review'])->middleware(['auth', 'verified'])->name('review');
 Route::post('/review/{id}', [HistoryController::class, 'postReview'])->middleware(['auth', 'verified'])->name('review.post');
+Route::get('/reservations', [HistoryController::class, 'getReservations']);
+Route::get('/transactions', [HistoryController::class, 'getTransactions']);
+Route::get('/profit_city', [HistoryController::class, 'getTopProfitCities']);
+Route::get('/avg_ratings', [HistoryController::class, 'getAvgRatings']);
 
 
 Route::middleware('auth')->group(function () {
