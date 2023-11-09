@@ -1,11 +1,3 @@
-<style>
-    textarea {
-        resize:none;
-        width:30vw;
-        height:15vh;
-    }
-</style>
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -25,6 +17,19 @@
                     <form action="{{ route('tickets.submit') }}" method="post">
                         @csrf
                         
+                        <div class="w-1/2 mx-4">
+                                <x-input-label for="reservation" :value="__('Reservation')"/>
+                                <select name="reservation" class="form-input" style="width: 100%">
+                                    <option value="0">
+                                        Choose The Reservation
+                                    </option>
+                                    @foreach ($reservations as $item)
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->room->number . ' - ' . $item->room->type->name .  " (" . $item->checkin . " to " . $item->checkout . ") " }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                        </div>
                         <div class="mx-4 my-8">
                             <x-input-label for="image_path" :value="__('Picture')" />
                             <x-text-input id="image_path" name="image_path" type="file" accept="image/*" class="mt-1 block w-full" :value="old('image_path')" />
@@ -32,7 +37,12 @@
                         </div>
                         <div class="m-4">
                             <x-input-label for="message" :value="__('Description')"/>
-                            <textarea x-model="message" style=""></textarea>
+                            <textarea x-model="message"
+                                style="
+                                    resize:none;
+                                    width: 30vw;
+                                    height: 15vh;
+                            "></textarea>
                         </div>
 
                         <div class="flex items-center justify mt-9">
