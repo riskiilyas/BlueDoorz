@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,4 +16,11 @@ class HistoryController extends Controller
         $reservations = $user->reservations()->with('payment', 'room')->get();
 
         return view('history', compact('reservations'));    }
+
+    public function review($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+
+        return view('review', compact('reservation'));
+    }
 }

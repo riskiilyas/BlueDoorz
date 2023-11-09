@@ -39,9 +39,8 @@
                                     <td class="py-2 px-4">{{ $reservation->payment->bank_name }}</td>
                                     <td class="py-2 px-4">
                                         <x-route-button
-                                            href="/">{{ __('Give Review') }}
+                                            href="/review/{{$reservation->id}}">{{ __('Give Review') }}
                                         </x-route-button>
-{{--                                        <a href="/" class="text-blue-500 hover:underline">Make a Review</a>--}}
                                     </td>
                                 </tr>
                             @endforeach

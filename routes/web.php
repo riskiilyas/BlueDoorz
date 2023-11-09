@@ -26,6 +26,7 @@ Route::get('/search', [DashboardController::class, 'search'])->middleware(['auth
 Route::get('/room/{id}', [DashboardController::class, 'room'])->middleware(['auth', 'verified'])->name('room');
 Route::get('/book/{id}', [DashboardController::class, 'book'])->middleware(['auth', 'verified'])->name('book');
 Route::post('/book/{id}', [DashboardController::class, 'pay'])->middleware(['auth', 'verified'])->name('pay');
+Route::get('/review/{id}', [HistoryController::class, 'review'])->middleware(['auth', 'verified'])->name('review');
 
 
 Route::middleware('auth')->group(function () {
