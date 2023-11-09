@@ -42,7 +42,7 @@
 
                     <form
                         @if(isset($parameters['daterange']))
-                            action="/pay/{{$room->id}}?daterange={{$parameters['daterange']}}"
+                            action="/book/{{$room->id}}?daterange={{$parameters['daterange']}}"
                         @else
                             action="{{ route('pay', ['id' => $room->id]) }}"
                         @endif
