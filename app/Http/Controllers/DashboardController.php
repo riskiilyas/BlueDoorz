@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentBank;
 use App\Models\Room;
 use App\Models\RoomType;
 use App\Models\User;
@@ -84,7 +85,7 @@ class DashboardController extends Controller
         $totalPrice = $room->type->price * $numberOfDays;
 
         $parameters = $request->all();
-        return view('booking')->with(['room' => $room, 'parameters' => $parameters, 'totalPrice' => $totalPrice]);
+        return view('booking')->with(['room' => $room, 'parameters' => $parameters, 'totalPrice' => $totalPrice, 'paymentBanks' => PaymentBank::all()]);
     }
 
     public function pay(Request $request, $id)

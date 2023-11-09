@@ -40,9 +40,48 @@
                         </h2>
                     </div>
                     <p class="mb-4 font-medium text-gray-700">Bank Account for Transfer:</p>
-                    <p><strong>Bank Name:</strong> Bank BCA</p>
-                    <p><strong>Account Name:</strong> BlueDoorz ltd</p>
-                    <p><strong>Account Number:</strong> 023109836282</p>
+                    <select name="payment_bank_id" id="payment_bank_id" class="form-control">
+                        <option value="">Select a Payment Bank</option>
+                        @foreach($paymentBanks as $paymentBank)
+                            <option value="{{ $paymentBank->id }}">
+                                {{ $paymentBank->bank_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <br>
+                    <img id="bankImage" src="" alt="Selected Bank Image" style="max-width: 200px; max-height: 200px; display: none; margin-top: 10px;">
+                    <p><strong>Bank Name:</strong> <span id="bankName"></span></p>
+                    <p><strong>Account Name:</strong> <span id="accountName"></span></p>
+                    <p><strong>Account Number:</strong> <span id="accountNumber"></span></p>
+
+                    <script>
+                        // Add JavaScript to handle the displayed information based on the selected bank
+                        const paymentBankSelect = document.getElementById('payment_bank_id');
+                        const bankNameElement = document.getElementById('bankName');
+                        const accountNameElement = document.getElementById('accountName');
+                        const accountNumberElement = document.getElementById('accountNumber');
+                        const bankImage = document.getElementById('bankImage');
+
+                        paymentBankSelect.addEventListener('change', function () {
+                            const selectedOption = paymentBankSelect.options[paymentBankSelect.selectedIndex];
+                            if (selectedOption.value) {
+                                const selectedBankId = selectedOption.value;
+                                const selectedPaymentBank = @json($paymentBanks->keyBy('id'));
+                                const selectedBank = selectedPaymentBank[selectedOption.value];
+                                // Update the displayed information with the retrieved bank details
+                                bankNameElement.textContent = data.bankName;
+                                accountNameElement.textContent = data.accountName;
+                                accountNumberElement.textContent = data.accountNumber;
+                                bankImage.src = `{{ asset('storage/') }}/${selectedBank.bank_image_path}`;
+                                bankImage.style.display = 'block';
+                            } else {
+                                // Clear the displayed information when no bank is selected
+                                bankNameElement.textContent = '';
+                                accountNameElement.textContent = '';
+                                accountNumberElement.textContent = '';
+                            }
+                        });
+                    </script>
                 </div>
 
                 <div class="w-1/2" style="height: 300px; max-width: 500px;">
@@ -72,6 +111,7 @@
                 @endif
                 method="post" enctype="multipart/form-data" class="container mx-auto p-4 w-1/2" id="paymentForm">
                 @csrf
+
                 <div class="mb-4 overflow-hidden items-center flex flex-col"> <!-- Center the label and input vertically -->
                     <label for="payment_proof" class="block font-medium text-gray-700 text-center mb-2">Payment Proof</label>
                     <div class="flex justify-center"> <!-- Center the displayed image horizontally -->
