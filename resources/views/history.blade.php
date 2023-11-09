@@ -33,14 +33,26 @@
                             <tbody class="divide-y divide-gray-300">
                             @foreach ($reservations as $reservation)
                                 <tr>
-                                    <td class="py-2 px-4">{{ $reservation->id }}</td>
+                                    <td class="py-2 px-4">
+                                        <div class="text-center">
+                                            {{ $reservation->id }}
+                                        </div>
+                                    </td>
                                     <td class="py-2 px-4">{{ $reservation->checkin }}</td>
                                     <td class="py-2 px-4">{{ $reservation->checkout }}</td>
                                     <td class="py-2 px-4">Rp.{{ number_format($reservation->total_price) }}</td>
                                     <td class="py-2 px-4">{{ $reservation->room->number }}</td>
                                     <td class="py-2 px-4">{{ $reservation->room->type->name }}</td>
                                     <td class="py-2 px-4">{{ $reservation->room->branchAddress->city }}</td>
-                                    <td class="py-2 px-4">{{ $reservation->payment->bank_name }}</td>
+                                    <td class="py-2 px-4 flex items-center">
+                                        @if ($reservation->payment->bank_image_path)
+                                            <img src="{{ asset('storage/' . $reservation->payment->bank_image_path) }}" alt="{{ $reservation->payment->bank_name }}"
+                                                 class="w-full h-full object-cover">
+                                        @else
+                                            {{ $reservation->payment->bank_name }}
+                                        @endif
+                                    </td>
+
                                     <td class="py-2 px-4">
                                         @if ($reservation->rating)
                                             <div class="text-md">
@@ -52,12 +64,12 @@
                                                 @endfor
                                             </div>
                                         @else
-                                            <x-route-button
-                                                href="/review/{{$reservation->id}}">{{ __('Give Review') }}</x-route-button>
+                                            <x-route-button href="/review/{{$reservation->id}}">{{ __('Give Review') }}</x-route-button>
                                         @endif
                                     </td>
                                 </tr>
                             @endforeach
+
 
                             </tbody>
                         </table>
