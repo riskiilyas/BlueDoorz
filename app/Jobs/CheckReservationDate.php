@@ -28,7 +28,7 @@ class CheckReservationDate implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
-        $reservations = Reservation::where('checkin', '>=', today()->subDays(3));
+        $reservations = Reservation::where('checkin', '>=', today()->subDays(3))->get();
 
         foreach ($reservations as $reservation) {
             $this->handleCheckin($reservation);
@@ -37,7 +37,7 @@ class CheckReservationDate implements ShouldQueue, ShouldBeUnique
     }
 
     private function handleCheckin($reservation) {
-        $checkin = $reservation->checkin;
+        $checkin = Carbon::parse($reservation->checkin);
         $threeDaysAgo = today()->subDays(3);
 
         if($checkin == $threeDaysAgo && $reservation->checkin_state == 'PENDING-IN') {
@@ -46,7 +46,7 @@ class CheckReservationDate implements ShouldQueue, ShouldBeUnique
     }
 
     private function handleCheckout($reservation) {
-        $checkout = $reservation->checkout;
+        $checkout = Carbon::parse($reservation->checkout);
 
         if($checkout->isToday() && $reservation->checkin_state == 'IN') {
             $reservation->update(['checkin_state' => 'PENDING-OUT']);
