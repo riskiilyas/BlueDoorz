@@ -28,7 +28,7 @@ class CheckReservationDate implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::where('checkin', '>=', today()->subDays(3));
 
         foreach ($reservations as $reservation) {
             $this->handleCheckin($reservation);
@@ -40,28 +40,19 @@ class CheckReservationDate implements ShouldQueue, ShouldBeUnique
         $checkin = $reservation->checkin;
         $threeDaysAgo = today()->subDays(3);
 
-        if($checkin == $threeDaysAgo) {
-            if($reservation->checkin_state == 'PENDING-IN') {
-                $reservation->checkin_state = 'CANCELLED';
-                $reservation->save();
-            }
+        if($checkin == $threeDaysAgo && $reservation->checkin_state == 'PENDING-IN') {
+            $reservation->update(['checkin_state' => 'CANCELLED']);
         }
     }
 
     private function handleCheckout($reservation) {
         $checkout = $reservation->checkout;
 
-        if($checkout->isToday()) {
-            if($reservation->checkin_state == 'IN') {
-                $reservation->checkin_state = 'PENDING-OUT';
-                $reservation->save();
-            }
+        if($checkout->isToday() && $reservation->checkin_state == 'IN') {
+            $reservation->update(['checkin_state' => 'PENDING-OUT']);
         }
-        else if($checkout->isPast()) {
-            if($reservation->checkin_state == 'PENDING-OUT') {
-                $reservation->total_price += round($reservation->room->type->price * 0.5);
-                $reservation->save();
-            }
+        else if($checkout->isPast() && $reservation->checkin_state == 'PENDING-OUT') {
+            $reservation->update(['total_price' => round($reservation->room->type->price * 0.5)]);
         }
     }
 }
