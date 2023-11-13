@@ -48,7 +48,7 @@ class CheckReservationDate implements ShouldQueue, ShouldBeUnique
     private function handleCheckout($reservation) {
         $checkout = Carbon::parse($reservation->checkout);
 
-        if($checkout->isToday() && $reservation->checkin_state == 'IN') {
+        if(($checkout->isToday() || $checkout->isPast()) && $reservation->checkin_state == 'IN') {
             $reservation->update(['checkin_state' => 'PENDING-OUT']);
         }
         else if($checkout->isPast() && $reservation->checkin_state == 'PENDING-OUT') {
