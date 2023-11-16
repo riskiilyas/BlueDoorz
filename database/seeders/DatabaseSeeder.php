@@ -80,7 +80,6 @@ class DatabaseSeeder extends Seeder
             $daysDifference = $checkin->diff($checkout)->days;
             $totalPrice = $roomTypePrice * $daysDifference;
 
-            $checkin_states = ['IN','OUT','PENDING-OUT','PENDING-IN', 'CANCELLED'];
 
             DB::table('reservations')->insert([
                 'checkin' => $checkin,
