@@ -12,14 +12,16 @@
     </x-slot>
 
     <div class="py-12">
-        @if(session('success'))
-            <div class="alert alert-success font-medium text-sm text-green-600">
-                {{ session('success') }}
-            </div>
-        @endif
+        
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(session('success'))
+                        <div class="alert alert-success font-medium text-sm text-green-600">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    
                     {{ __("Booking") }}
                     <br><br>
                     <form action="{{ route('dashboard.search') }}" method="get">
