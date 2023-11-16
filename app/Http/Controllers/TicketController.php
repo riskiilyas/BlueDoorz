@@ -41,9 +41,9 @@ class TicketController extends Controller
             'description'=> $request->message,
         ]);
 
-        
+
         Session::flash('success', 'Customer Service ticket sent successfully');
-        return redirect()->route('dashboard');
+        return redirect()->route('tickets');
 
     }
 }

@@ -9,6 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    @if(session('success'))
+                        <div class="alert alert-success font-medium text-sm text-green-600 my-4 mx-4">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight ml-4 mb-5">
                         {{ __('Customer Ticket Form') }}
@@ -17,7 +22,7 @@
                     <form action="{{ route('tickets.submit') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         
-                        <div class="w-1/2 mx-4">
+                        <div class="w-1/2 mx-4 my-4">
                                 <x-input-label for="reservation" :value="__('Reservation')"/>
                                 <select name="reservation" class="form-input" style="width: 100%">
                                     <option value="0">
@@ -91,7 +96,7 @@
                             {{$ticket->description}}
                         </div>
                         
-
+                        <hr>
                     @endforeach
                     </div>
 
