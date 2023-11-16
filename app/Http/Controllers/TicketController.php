@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+
 
 class TicketController extends Controller
 {
@@ -32,14 +34,26 @@ class TicketController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
+        if(isset($request->image_path)) {
+            $image = $request->file('image_path');
+            $imgname = $image->getClientOriginalName();
+            $imgpath = "public/storage/tickets/" . $imgname;
+        }
 
+        else {
+            $imgpath = NULL;
+        }
+
+        
         //put in database
         CustomerService::create([
             'reservation_id' => $request->reservation,
             'user_id' => auth()->user()->id,
-            'image_path' => $request->image_path,
+            'image_path' => $imgpath,
             'description'=> $request->message,
         ]);
+
+        if(isset($request->image_path)) Storage::put($imgpath, $image);
 
 
         Session::flash('success', 'Customer Service ticket sent successfully');
