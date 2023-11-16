@@ -30,4 +30,8 @@ class Reservation extends Model
     {
         return $this->hasOne(Rating::class);
     }
+
+    protected $dispatchesEvents = [
+        'created' => \App\Events\ReservationCreated::class,
+    ];
 }
