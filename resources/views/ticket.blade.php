@@ -14,7 +14,7 @@
                         {{ __('Customer Ticket Form') }}
                     </h2>
                     <hr/>
-                    <form action="{{ route('tickets.submit') }}" method="post">
+                    <form action="{{ route('tickets.submit') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         
                         <div class="w-1/2 mx-4">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="m-4">
                             <x-input-label for="message" :value="__('Description')"/>
-                            <textarea x-model="message"
+                            <textarea name="message" x-model="message"
                                 style="
                                     resize:none;
                                     width: 30vw;
@@ -53,6 +53,11 @@
                                 {{ __('Submit') }}
                             </x-primary-button>
                         </div>
+                        @if(isset($success))
+                        <div x-data="{ success: '{{$success}}' }">
+                            <strong x-text="success"></strong>
+                        </div>
+                        @endif
                     </form>
                     
 

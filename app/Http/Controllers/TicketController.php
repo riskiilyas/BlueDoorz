@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerService;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -31,6 +32,14 @@ class TicketController extends Controller
 
 
         //put in database
+        CustomerService::create([
+            'reservation_id' => $request->reservation,
+            'user_id' => auth()->user()->id,
+            'image_path' => $request->image_path,
+            'description'=> $request->message,
+        ]);
+
+        return back()->with('success','Ticket has been sent');
 
     }
 }
