@@ -12,7 +12,7 @@
 <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
     <h2 class="text-2xl font-semibold mb-4">Reservation Confirmation</h2>
     <p class="mb-4">Dear {{ $name }},</p>
-    <p>Your reservation for Room {{ $roomNumber }} has already been created. Thank you for choosing BlueDoorz.</p>
+    <p>Your reservation for {{ $roomNumber }} has already been created. Thank you for choosing BlueDoorz.</p>
     <p class="mt-4">Regards,<br>BlueDoorz Team</p>
 </div>
 </body>
