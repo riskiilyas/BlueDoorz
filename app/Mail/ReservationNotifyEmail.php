@@ -27,8 +27,9 @@ class ReservationNotifyEmail extends Mailable
      */
     public function envelope(): Envelope
     {
+        $mail = env('MAIL_FROM_ADDRESS');
         return new Envelope(
-            from: new Address('riskistudy@gmail.com', 'Bluedoorz'),
+            from: new Address($mail, 'Bluedoorz'),
             subject: 'Reservation Notification',
         );
     }
