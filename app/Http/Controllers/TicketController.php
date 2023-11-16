@@ -7,6 +7,7 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
 
 class TicketController extends Controller
 {
@@ -39,7 +40,8 @@ class TicketController extends Controller
             'description'=> $request->message,
         ]);
 
-        return back()->with('success','Ticket has been sent');
+        Session::flash('success', 'Customer Service ticket sent successfully');
+        return redirect()->route('dashboard');
 
     }
 }
