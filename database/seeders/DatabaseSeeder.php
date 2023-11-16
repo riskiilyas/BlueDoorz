@@ -92,24 +92,7 @@ class DatabaseSeeder extends Seeder
                 'payment_bank_id' => $faker->randomElement(PaymentBank::pluck('id')),
                 'created_at' => $checkin, // Set created_at to checkin date
                 'updated_at' => now(),
-                'checkin_state' => (function ($checkin, $checkout, $checkin_states){
-                    $now = now();
-                    $checkin = Carbon::parse($checkin);
-                    $checkout = Carbon::parse($checkout);
-
-                    if($now->isBetween($checkin, $checkout)) {
-                        return 'IN';
-                    }
-                    else if($now->isBefore($checkin)) {
-                        return 'PENDING-IN';
-                    }
-                    else if($now->isSameDay($checkin)) {
-                        return $checkin_states[array_rand(['IN', 'PENDING-IN'])];
-                    }
-                    else if($now->isAfter($checkout) or $now->isSameDay($checkout)) {
-                        return $checkin_states[array_rand(['OUT', 'PENDING-OUT'])];
-                    }
-                })($checkin, $checkout, $checkin_states),
+                'lateness_fee' => 0
             ]);
         }
 

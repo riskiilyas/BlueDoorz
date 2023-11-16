@@ -26,7 +26,7 @@ class RunCheckReservation extends Command
      */
     public function handle()
     {
-        $this->info('Checking check-in and check-out dates');
+        $this->info('Checking check-out dates');
         CheckReservationDate::dispatch();
         $this->info('Job dispatched successfully!');
     }
