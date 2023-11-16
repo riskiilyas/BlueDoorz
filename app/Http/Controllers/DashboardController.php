@@ -28,6 +28,10 @@ class DashboardController extends Controller
             'city' => ['required', 'string', 'max:255'],
         ]);
 
+        if($validator->stopOnFirstFailure()->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
         $type = intval($request->type);
         $city = intval($request->city);
 
