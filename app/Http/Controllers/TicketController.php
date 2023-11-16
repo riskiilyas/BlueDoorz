@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerService;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class TicketController extends Controller
 {
@@ -15,6 +18,28 @@ class TicketController extends Controller
     }
 
     public function submit(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'reservation'=> ['required', Rule::ProhibitedIf($request->reservation == 0), 'exists:reservations,id'],
+            'message'=> ['required', 'ascii'],
+            'image_path' => ['image','mimes:jpeg,png,jpg,gif','max:2048'],
+        ], [
+           'reservation'=> 'Choose a reservation'
+        ]);
+
+        if($validator->stopOnFirstFailure()->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+
+        //put in database
+        CustomerService::create([
+            'reservation_id' => $request->reservation,
+            'user_id' => auth()->user()->id,
+            'image_path' => $request->image_path,
+            'description'=> $request->message,
+        ]);
+
+        return back()->with('success','Ticket has been sent');
 
     }
 }

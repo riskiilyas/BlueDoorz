@@ -14,14 +14,14 @@
                         {{ __('Customer Ticket Form') }}
                     </h2>
                     <hr/>
-                    <form action="{{ route('tickets.submit') }}" method="post">
+                    <form action="{{ route('tickets.submit') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         
                         <div class="w-1/2 mx-4">
                                 <x-input-label for="reservation" :value="__('Reservation')"/>
                                 <select name="reservation" class="form-input" style="width: 100%">
                                     <option value="0">
-                                        Choose The Reservation
+                                        Reservation list
                                     </option>
                                     @foreach ($reservations as $item)
                                         <option value="{{ $item->id }}">
@@ -29,20 +29,23 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                <x-input-error :messages="$errors->get('reservation')" class="mt-2" />
                         </div>
                         <div class="mx-4 my-8">
-                            <x-input-label for="image_path" :value="__('Picture')" />
+                            <x-input-label for="image_path" :value="__('Picture *')" />
                             <x-text-input id="image_path" name="image_path" type="file" accept="image/*" class="mt-1 block w-full" :value="old('image_path')" />
                             <x-input-error class="mt-2" :messages="$errors->get('image_path')" />
                         </div>
                         <div class="m-4">
                             <x-input-label for="message" :value="__('Description')"/>
-                            <textarea x-model="message"
+                            <textarea name="message" x-model="message"
                                 style="
                                     resize:none;
                                     width: 30vw;
                                     height: 15vh;
                             "></textarea>
+                            <x-input-error :messages="$errors->get('message')" class="mt-2" />
+                            <br><br>* not required
                         </div>
 
                         <div class="flex items-center justify mt-9">
@@ -50,6 +53,11 @@
                                 {{ __('Submit') }}
                             </x-primary-button>
                         </div>
+                        @if(isset($success))
+                        <div x-data="{ success: '{{$success}}' }">
+                            <strong x-text="success"></strong>
+                        </div>
+                        @endif
                     </form>
                     
 

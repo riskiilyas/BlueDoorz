@@ -6,7 +6,6 @@ namespace Database\Seeders;
 use App\Models\Barang;
 use App\Models\BranchAddress;
 use App\Models\PaymentBank;
-use App\Models\Role;
 use App\Models\Room;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -81,16 +80,18 @@ class DatabaseSeeder extends Seeder
             $daysDifference = $checkin->diff($checkout)->days;
             $totalPrice = $roomTypePrice * $daysDifference;
 
+
             DB::table('reservations')->insert([
                 'checkin' => $checkin,
                 'checkout' => $checkout,
                 'payment_proof' => 'statics/sample_receipt.png',
                 'total_price' => $totalPrice,
-                'room_id' => $faker->randomElement(\App\Models\Room::pluck('id')),
+                'room_id' => $faker->randomElement(Room::pluck('id')),
                 'user_id' => $faker->randomElement(\App\Models\User::pluck('id')),
-                'payment_bank_id' => $faker->randomElement(\App\Models\PaymentBank::pluck('id')),
+                'payment_bank_id' => $faker->randomElement(PaymentBank::pluck('id')),
                 'created_at' => $checkin, // Set created_at to checkin date
                 'updated_at' => now(),
+                'lateness_fee' => 0
             ]);
         }
 
