@@ -28,7 +28,7 @@ class CheckReservationDate implements ShouldQueue, ShouldBeUnique
      */
     public function handle(): void
     {
-        $reservations = Reservation::where('checkout', '>=', today())->get();
+        $reservations = Reservation::where('checkout', '<=', today())->get();
 
         foreach ($reservations as $reservation) {
             $curr_lateness_fee = $reservation->lateness_fee + round($reservation->room->type->price * 0.5); 

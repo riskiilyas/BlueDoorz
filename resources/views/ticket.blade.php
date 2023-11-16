@@ -65,4 +65,40 @@
             </div>
         </div>
     </div>
+
+    <div class="py-2">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight ml-4 mb-5">
+                        {{ __('Your sent tickets') }}
+                    </h2>
+                    <hr/>
+                    <div class="container">
+                    @foreach ($tickets as $ticket)
+                    <div class="mb-4 md:mb-0">
+                        <div class="mx-4 my-8">
+                            {{ $ticket->reservation->room->number .
+                            ' - ' . $ticket->reservation->room->type->name . 
+                            " (" . $ticket->reservation->checkin . 
+                            " to " . $ticket->reservation->checkout . 
+                            ") " }}
+                        </div>
+                        <img src="{{ asset('storage/'.$ticket->image_path) }}"
+                            style="height: 200px; object-fit: cover;" alt="">
+                        
+                        <div class="mx-4 my-8">
+                            {{$ticket->description}}
+                        </div>
+                        
+
+                    @endforeach
+                    </div>
+
+                    {{$tickets->links()}}
+                </div>
+            </div>
+        </div>
+    </div>
+
 </x-app-layout>

@@ -7,14 +7,16 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
 
 class TicketController extends Controller
 {
     public function index() {
         $user = auth()->user();
         $reservations = $user->reservations;
+        $tickets = CustomerService::where("user_id", $user->id)->paginate(12);
 
-        return view('ticket', ['reservations' => $reservations]);
+        return view('ticket', ['reservations' => $reservations, 'tickets' => $tickets]);
     }
 
     public function submit(Request $request) {
@@ -39,7 +41,9 @@ class TicketController extends Controller
             'description'=> $request->message,
         ]);
 
-        return back()->with('success','Ticket has been sent');
+        
+        Session::flash('success', 'Customer Service ticket sent successfully');
+        return redirect()->route('dashboard');
 
     }
 }
