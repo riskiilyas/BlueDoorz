@@ -82,18 +82,38 @@
                     <div class="container">
                     @foreach ($tickets as $ticket)
                     <div class="mb-4 md:mb-0">
-                        <div class="mx-4 my-8">
-                            {{ $ticket->reservation->room->number .
-                            ' - ' . $ticket->reservation->room->type->name . 
-                            " (" . $ticket->reservation->checkin . 
-                            " to " . $ticket->reservation->checkout . 
-                            ") " }}
-                        </div>
-                        <img src="{{ asset('storage/' . str_replace('public/', '', $ticket->image_path)) }}"
-                            style="height: 200px; object-fit: cover;" alt="">
-                        
-                        <div class="mx-4 my-8">
-                            {{$ticket->description}}
+
+                        <div class="mx-4 my-8" x-data="{ open: false }">
+                            <button x-on:click="open = !open">
+                                {{ $ticket->reservation->room->number .
+                                ' - ' . $ticket->reservation->room->type->name . 
+                                " (" . $ticket->reservation->checkin . 
+                                " to " . $ticket->reservation->checkout . 
+                                ") " }}
+                                <span :class="{'rotated': open}">&raquo;</span>
+                                <style>
+                                    .rotated {
+                                    transform: rotate(90deg);
+                                    display: inline-block;
+                                    }
+                                </style>
+                            </button>
+                            <div class="bg-neutral-200">
+                                <ul x-show="open">
+                                    <li>
+                                        <div class="mx-4 my-8">
+                                            ================
+                                            <img src="{{ asset('storage/' . str_replace('public/', '', $ticket->image_path)) }}"
+                                            style="height: 200px; object-fit: cover;" alt="No image">
+                                            ================
+
+                                        </div>
+                                    </li>     
+                                    <li><div class="mx-4 my-8">
+                                        Description : {{$ticket->description}}
+                                    </div></li>
+                                </ul>
+                            </div>
                         </div>
                         
                         <hr>
