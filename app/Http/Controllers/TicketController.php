@@ -37,7 +37,7 @@ class TicketController extends Controller
         if(isset($request->image_path)) {
             $image = $request->file('image_path');
             $imgname = $image->getClientOriginalName();
-            $imgpath = "public/storage/tickets/" . $imgname;
+            $imgpath = "public/tickets/";
         }
 
         else {
@@ -49,11 +49,11 @@ class TicketController extends Controller
         CustomerService::create([
             'reservation_id' => $request->reservation,
             'user_id' => auth()->user()->id,
-            'image_path' => $imgpath,
+            'image_path' => $imgpath . $imgname,
             'description'=> $request->message,
         ]);
 
-        if(isset($request->image_path)) Storage::put($imgpath, $image);
+        if(isset($request->image_path)) Storage::putFileAs($imgpath, $image, $imgname);
 
 
         Session::flash('success', 'Customer Service ticket sent successfully');

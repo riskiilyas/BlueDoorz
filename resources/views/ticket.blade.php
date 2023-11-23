@@ -89,7 +89,7 @@
                             " to " . $ticket->reservation->checkout . 
                             ") " }}
                         </div>
-                        <img src="{{ asset('storage/'.$ticket->image_path) }}"
+                        <img src="{{ asset('storage/' . str_replace('public/', '', $ticket->image_path)) }}"
                             style="height: 200px; object-fit: cover;" alt="">
                         
                         <div class="mx-4 my-8">
