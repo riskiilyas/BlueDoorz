@@ -101,7 +101,7 @@
                             <div class="bg-neutral-200">
                                 <ul x-show="open">
                                     <li>
-                                        <div class="mx-4 my-8">
+                                        <div class="mx-4 my-8 mb-5">
                                             ================
                                             <img src="{{ asset('storage/' . str_replace('public/', '', $ticket->image_path)) }}"
                                             style="height: 200px; object-fit: cover;" alt="No image">
@@ -110,7 +110,13 @@
                                         </div>
                                     </li>     
                                     <li><div class="mx-4 my-8">
-                                        Description : {{$ticket->description}}
+                                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
+                                            {{ __('Description') }}
+                                        </h2>
+                                        <hr>
+                                        <div class="ml-3">
+                                            {{$ticket->description}}
+                                        </div>
                                     </div></li>
                                 </ul>
                             </div>
