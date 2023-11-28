@@ -112,6 +112,7 @@
                                         @if ($loop->first && !empty($image->image_path))
                                             <img src="{{ asset('storage/'.$image->image_path) }}"
                                                  style="height: 200px; object-fit: cover;" alt="Room Image">
+                                            @break
                                         @endif
                                     @endforeach
                                     <br>
