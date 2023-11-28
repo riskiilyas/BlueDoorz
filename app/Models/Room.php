@@ -47,4 +47,17 @@ class Room extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public static function getAvailableRooms($startDate, $endDate) {
+        $availableRooms = self::whereDoesntHave('reservations', function ($query) use ($startDate, $endDate) {
+            $query->where(function ($subquery) use ($startDate, $endDate) {
+                // Check for reservations that intersect with the requested date range
+                $subquery->where(function ($intersectQuery) use ($startDate, $endDate) {
+                    $intersectQuery->where('checkin', '<', $endDate)
+                        ->where('checkout', '>', $startDate);
+                });
+            });
+        });
+        return $availableRooms;
+    }
 }

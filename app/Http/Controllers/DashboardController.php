@@ -16,7 +16,12 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard')->with('rooms', Room::paginate(12));;
+        $today = Carbon::today();
+        $threebefore = $today->subDays(1);
+        $threeafter = $today->addDays(1);
+        $availableRooms = Room::getAvailableRooms($threebefore, $threeafter);
+        
+        return view('dashboard')->with('rooms', $availableRooms->paginate(12));
     }
 
     public function search(Request $request)
@@ -39,15 +44,7 @@ class DashboardController extends Controller
         $startDate = Carbon::createFromFormat('d/m/Y', $dateRange[0]);
         $endDate = Carbon::createFromFormat('d/m/Y', $dateRange[1]);
 
-        $availableRooms = Room::whereDoesntHave('reservations', function ($query) use ($startDate, $endDate) {
-            $query->where(function ($subquery) use ($startDate, $endDate) {
-                // Check for reservations that intersect with the requested date range
-                $subquery->where(function ($intersectQuery) use ($startDate, $endDate) {
-                    $intersectQuery->where('checkin', '<', $endDate)
-                        ->where('checkout', '>', $startDate);
-                });
-            });
-        });
+        $availableRooms = Room::getAvailableRooms($startDate, $endDate);
 
         if ($type != 0) {
             $availableRooms = $availableRooms->whereHas('type', function ($query) use ($type) {
