@@ -118,6 +118,19 @@
                                             {{$ticket->description}}
                                         </div>
                                     </div></li>
+                                    <li><div class="mx-4 my-8">
+                                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
+                                            {{ __('Response') }}
+                                        </h2>
+                                        <hr>
+                                        <div class="ml-3">
+                                        @if(isset($ticket->response))
+                                            {{$ticket->response}}
+                                        @else
+                                            {{__('-')}}
+                                        @endif
+                                        </div>
+                                    </div></li>
                                 </ul>
                             </div>
                         </div>
