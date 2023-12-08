@@ -42,6 +42,7 @@ class TicketController extends Controller
 
         else {
             $imgpath = NULL;
+            $imgname = NULL;
         }
 
         
