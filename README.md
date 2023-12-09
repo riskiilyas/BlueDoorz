@@ -8,6 +8,9 @@
 - Riski Ilyas (5025211189)
 - Mikhael Aryasatya N (5025211062)
 
+## Demo
+https://youtu.be/qcVCZVCz5kc
+
 ## Installation
 - Clone or Download the Source Code
 - Create file ```.env``` inside project directory and copy the content of file ```.env.example``` from project directory to ```.env```
